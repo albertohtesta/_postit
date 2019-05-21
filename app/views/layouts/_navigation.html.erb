@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container">
+  <%= link_to "Postit!", root_path, :class =>'navbar-brand' %>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+      	<%= link_to 'Nueva Categoria', new_category_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <% if logged_in? %>
+
+        <li class='nav_item'>
+  		    <%= link_to 'Nueva Entrada', new_post_path, class: 'btn btn-small btn-success' %>
+        </li>
+        <li class='nav_item'>
+          <%= link_to 'Cerrar sesion', logout_path, class: 'btn btn-small' %>
+        </li>
+      <% else %>
+        <li class='nav_item'>
+          <%= link_to 'Login', login_path, class: 'btn btn-small' %>
+        </li>
+        <li class='nav_item'>
+          <%= link_to 'Registrase', register_path, class: 'btn btn-small btn-success' %>
+        </li>
+      <% end %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categorias
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% Category.all.each do |category| %>
+            <%= link_to category.name, category_path(category), class: "dropdown-item" %>
+          <% end %>
+          <% if logged_in? %>
+              <div class="dropdown-divider"></div>
+              <%= link_to(new_category_path) do %>
+                <p class="dropdown-item">
+              	<i class='icon icon-plus'></i>
+              	Nueva Categoria
+                </p>
+              <% end %>
+          <% end %>
+        </div>
+      </li>
+<% if logged_in? %>
+    <div class='btn-group nav-item'>
+      <%= link_to('', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown') do %>
+        <%= current_user.username %>
+        <span class='caret'></span>
+      <% end %>   
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to edit_user_path(current_user) do %>
+              <i class='fa fa-pencil'></i>
+              Edita perfil
+              <% end %>
+            </li>
+            <li>
+              <%= link_to user_path(current_user) do %>
+              <i class='fa fa-user'></i>
+              Ver perfil
+              <% end %>
+            </li>
+            <li>
+              <%= link_to logout_path do %>
+              <i class='fa fa-external-link'></i>
+              Logout
+             <% end %> 
+            </li>
+          </ul>   
+    </div>
+    <% end %>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>

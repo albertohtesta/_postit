@@ -1,0 +1,37 @@
+<% if logged_in? %>
+	<p class='float-right'>
+		[<%= link_to 'Edita', edit_post_path(@post) %>]
+	</p>
+<% end %>
+
+<p>
+	<%= render @post.categories %>
+</p>
+
+<%= render 'shared/content_title', title: @post.title %>
+
+<p>
+	<%= @post.description %>
+</p>
+<hr/>
+
+<% if logged_in? %>
+	<div class="card bg-light mb-3">
+		<div class="card-body">
+			<div class="form">
+	    		<%= form_for [@post, @comment] do |f| %>
+	    			<%= render 'shared/errors', obj: @comment %>
+		    		<div class="form-group">
+		    			<%= f.label :body, 'Deja un comentario' %>
+		    			<%= f.text_area :body, rows: 3, class: 'form_control col-md-4'%>
+		    		</div>
+	    			<%= f.submit('Crear comentario', class: 'btn btn-primary') %>
+	    		<% end %>
+	    	</div>
+	    </div>
+	</div>
+<% end %>
+<h5>Comentarios:</h5>
+<% @post.comments.each do |comment| %>
+	<%= render 'comments/comment', comment: comment %>
+<% end %>

@@ -1,0 +1,30 @@
+<% show_post ||= false %>
+<div class="row">
+	<div class='col-sm-0'>
+		<div class="card bg-light mb-3 mr-3">
+			<div class="card-body">
+				<%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post'  do %>
+					<i class='fa fa-arrow-up'></i>
+				<% end %>
+				<br/>
+				<%= comment.total_votes %>
+				<br/>
+				<%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
+					<i class='fa fa-arrow-down'></i>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="card card-body bg-light col-sd-8 mb-2">
+		<em>"<%= comment.body %>"</em>
+		<% if show_post %>
+			en <%= link_to comment.post.title, post_path(comment.post) %>
+		<% end %>
+		<br/>
+		<span class="quiet">por:</span><%= link_to comment.creator.username, user_path(comment.creator) %>
+		<small>at <%= display_datetime(comment.created_at) %></small>
+	</div>
+</div>
+
+

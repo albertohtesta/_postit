@@ -1,9 +1,11 @@
-<%= render 'shared/content_title', title: 'Perfil: #{@user.username}' %>
+<%= render 'shared/content_title', title: "Perfil: #{@user.username}" %>
 
 <div class="well">
 	<dl class='dl-horizontal'>
-		<dt>Username:</dt>
+		<dt>Nombre de usuario:</dt>
 		<dd><%= @user.username %></dd>
+		<dt>Zona Horaria:</dt>
+		<dd><%= @user.time_zone %></dd>
 	</dl>
 </div>
 

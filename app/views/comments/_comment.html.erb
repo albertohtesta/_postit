@@ -3,13 +3,13 @@
 	<div class='col-sm-0'>
 		<div class="card bg-light mb-3 mr-3">
 			<div class="card-body">
-				<%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post'  do %>
+				<%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post', remote: true  do %>
 					<i class='fa fa-arrow-up'></i>
 				<% end %>
 				<br/>
-				<%= comment.total_votes %>
+				<span id="comment_<%= comment.id %>_votes"><%= comment.total_votes %></span>
 				<br/>
-				<%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
+				<%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true do %>
 					<i class='fa fa-arrow-down'></i>
 				<% end %>
 			</div>
